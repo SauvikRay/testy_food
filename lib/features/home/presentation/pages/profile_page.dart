@@ -55,7 +55,11 @@ class ProfilePage extends StatelessWidget {
                       radius: 16,
                       backgroundColor: AppColors.primary,
                       child: IconButton(
-                        icon: const Icon(Icons.camera_alt, size: 14, color: Colors.white),
+                        icon: const Icon(
+                          Icons.camera_alt,
+                          size: 14,
+                          color: Colors.white,
+                        ),
                         onPressed: () {},
                       ),
                     ),
@@ -66,12 +70,16 @@ class ProfilePage extends StatelessWidget {
             16.height,
             Text(
               'Alex Harrison',
-              style: AppTextStyles.headlineSmall.copyWith(fontWeight: FontWeight.bold),
+              style: AppTextStyles.headlineSmall.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             4.height,
             Text(
               'alex.harrison@gourmet.com',
-              style: AppTextStyles.bodyMedium.copyWith(color: AppColors.onSurfaceVariant),
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: AppColors.onSurfaceVariant,
+              ),
             ),
             32.height,
 
@@ -80,21 +88,33 @@ class ProfilePage extends StatelessWidget {
               color: Colors.white,
               borderRadius: AppSpacing.borderRadiusLG,
               clipBehavior: Clip.antiAlias,
-              shape: RoundedRectangleBorder(
-                borderRadius: AppSpacing.borderRadiusLG,
-                side: BorderSide(color: AppColors.outlineVariant.withValues(alpha: 0.5)),
-              ),
+              // shape: RoundedRectangleBorder(
+              //   borderRadius: AppSpacing.borderRadiusLG,
+              //   side: BorderSide(color: AppColors.outlineVariant.withValues(alpha: 0.5)),
+              // ),
               child: Column(
                 children: [
                   _buildProfileTile(Icons.shopping_bag_outlined, 'My Orders'),
                   const Divider(height: 1, color: AppColors.outlineVariant),
-                  _buildProfileTile(Icons.favorite_border, 'Favorites', onTap: () => context.go(AppRoutes.wishlist)),
+                  _buildProfileTile(
+                    Icons.favorite_border,
+                    'Favorites',
+                    onTap: () => context.go(AppRoutes.wishlist),
+                  ),
                   const Divider(height: 1, color: AppColors.outlineVariant),
-                  _buildProfileTile(Icons.location_on_outlined, 'Delivery Addresses'),
+                  _buildProfileTile(
+                    Icons.location_on_outlined,
+                    'Delivery Addresses',
+                  ),
                   const Divider(height: 1, color: AppColors.outlineVariant),
                   _buildProfileTile(Icons.payment_outlined, 'Payment Methods'),
                   const Divider(height: 1, color: AppColors.outlineVariant),
-                  _buildProfileTile(Icons.logout, 'Log Out', color: AppColors.primary, onTap: () => context.go(AppRoutes.login)),
+                  _buildProfileTile(
+                    Icons.logout,
+                    'Log Out',
+                    color: AppColors.primary,
+                    onTap: () => context.go(AppRoutes.login),
+                  ),
                 ],
               ),
             ),
@@ -104,7 +124,12 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileTile(IconData icon, String title, {Color? color, VoidCallback? onTap}) {
+  Widget _buildProfileTile(
+    IconData icon,
+    String title, {
+    Color? color,
+    VoidCallback? onTap,
+  }) {
     return ListTile(
       leading: Icon(icon, color: color ?? AppColors.onSurfaceVariant),
       title: Text(
