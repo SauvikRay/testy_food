@@ -4,7 +4,7 @@ import 'package:testy_food/core/routes/app_routes.dart';
 import 'package:testy_food/core/theme/app_colors.dart';
 import 'package:testy_food/core/theme/app_spacing.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
-import 'package:testy_food/core/utils/keyboard_utils.dart';
+import 'package:testy_food/core/widgets/common_text_field.dart';
 import 'package:testy_food/core/widgets/common_button.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -139,18 +139,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Column(
                           children: [
                             // Full Name Field
-                            TextFormField(
+                            CommonTextField(
                               controller: _nameController,
                               keyboardType: TextInputType.name,
-                              textInputAction: TextInputAction.next,
-                              style: AppTextStyles.bodyLarge,
-                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
-                              decoration: const InputDecoration(
-                                hintText: 'Full Name',
-                                prefixIcon: Icon(
-                                  Icons.person,
-                                  color: AppColors.outline,
-                                ),
+                              hintText: 'Full Name',
+                              prefixIcon: const Icon(
+                                Icons.person,
+                                color: AppColors.outline,
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -162,19 +157,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             16.height,
 
                             // Email Field
-                            TextFormField(
+                            CommonTextField(
                               controller: _emailController,
                               keyboardType: TextInputType.emailAddress,
-                              textInputAction: TextInputAction.next,
                               autofillHints: const [AutofillHints.email],
-                              style: AppTextStyles.bodyLarge,
-                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
-                              decoration: const InputDecoration(
-                                hintText: 'Email Address',
-                                prefixIcon: Icon(
-                                  Icons.email,
-                                  color: AppColors.outline,
-                                ),
+                              hintText: 'Email Address',
+                              prefixIcon: const Icon(
+                                Icons.email,
+                                color: AppColors.outline,
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -190,32 +180,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             16.height,
 
                             // Password Field
-                            TextFormField(
+                            CommonTextField(
                               controller: _passwordController,
                               obscureText: _obscurePassword,
-                              textInputAction: TextInputAction.next,
                               autofillHints: const [AutofillHints.newPassword],
-                              style: AppTextStyles.bodyLarge,
-                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
-                              decoration: InputDecoration(
-                                hintText: 'Password',
-                                prefixIcon: const Icon(
-                                  Icons.lock,
+                              hintText: 'Password',
+                              prefixIcon: const Icon(
+                                Icons.lock,
+                                color: AppColors.outline,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _obscurePassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
                                   color: AppColors.outline,
                                 ),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscurePassword
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: AppColors.outline,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscurePassword = !_obscurePassword;
-                                    });
-                                  },
-                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _obscurePassword = !_obscurePassword;
+                                  });
+                                },
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -230,32 +215,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             16.height,
 
                             // Confirm Password Field
-                            TextFormField(
+                            CommonTextField(
                               controller: _confirmPasswordController,
                               obscureText: _obscureConfirmPassword,
                               textInputAction: TextInputAction.done,
-                              style: AppTextStyles.bodyLarge,
-                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
-                              decoration: InputDecoration(
-                                hintText: 'Confirm Password',
-                                prefixIcon: const Icon(
-                                  Icons.lock_outline,
+                              hintText: 'Confirm Password',
+                              prefixIcon: const Icon(
+                                Icons.lock_outline,
+                                color: AppColors.outline,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _obscureConfirmPassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
                                   color: AppColors.outline,
                                 ),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscureConfirmPassword
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: AppColors.outline,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscureConfirmPassword =
-                                          !_obscureConfirmPassword;
-                                    });
-                                  },
-                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _obscureConfirmPassword =
+                                        !_obscureConfirmPassword;
+                                  });
+                                },
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {

@@ -4,7 +4,7 @@ import 'package:testy_food/core/theme/app_colors.dart';
 import 'package:testy_food/core/theme/app_spacing.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
 import 'package:testy_food/core/routes/app_routes.dart';
-import 'package:testy_food/core/utils/keyboard_utils.dart';
+import 'package:testy_food/core/widgets/common_text_field.dart';
 import 'package:testy_food/core/widgets/common_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -164,17 +164,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             8.height,
-                            TextFormField(
+                            CommonTextField(
                               controller: _emailController,
                               keyboardType: TextInputType.emailAddress,
-                              style: AppTextStyles.bodyLarge,
-                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
-                              decoration: const InputDecoration(
-                                hintText: 'name@example.com',
-                                prefixIcon: Icon(
-                                  Icons.mail,
-                                  color: AppColors.outline,
-                                ),
+                              hintText: 'name@example.com',
+                              prefixIcon: const Icon(
+                                Icons.mail,
+                                color: AppColors.outline,
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -217,30 +213,27 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                             8.height,
-                            TextFormField(
+                            CommonTextField(
                               controller: _passwordController,
                               obscureText: _obscurePassword,
-                              style: AppTextStyles.bodyLarge,
-                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
-                              decoration: InputDecoration(
-                                hintText: 'Enter your password',
-                                prefixIcon: const Icon(
-                                  Icons.lock,
+                              textInputAction: TextInputAction.done,
+                              hintText: 'Enter your password',
+                              prefixIcon: const Icon(
+                                Icons.lock,
+                                color: AppColors.outline,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _obscurePassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
                                   color: AppColors.outline,
                                 ),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscurePassword
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: AppColors.outline,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscurePassword = !_obscurePassword;
-                                    });
-                                  },
-                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _obscurePassword = !_obscurePassword;
+                                  });
+                                },
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
