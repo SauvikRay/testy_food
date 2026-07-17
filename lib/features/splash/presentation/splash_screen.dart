@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:testy_food/core/theme/app_colors.dart';
+import 'package:testy_food/core/routes/app_routes.dart';
 import 'package:testy_food/core/theme/app_spacing.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
 import 'package:testy_food/core/widgets/common_cached_network_image.dart';
@@ -48,10 +49,10 @@ class _SplashScreenState extends State<SplashScreen>
     // Fade in logo elements
     _logoController.forward();
 
-    // Navigate to onboarding after 3.8 seconds
+    // Navigate to onboarding after 5 seconds
     Timer(const Duration(seconds: 5), () {
       if (mounted) {
-        context.go('/onboarding');
+        context.go(AppRoutes.onboarding);
       }
     });
   }

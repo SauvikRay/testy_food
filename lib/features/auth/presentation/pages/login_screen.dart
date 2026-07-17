@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:testy_food/core/theme/app_colors.dart';
 import 'package:testy_food/core/theme/app_spacing.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
+import 'package:testy_food/core/routes/app_routes.dart';
 import 'package:testy_food/core/widgets/common_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleLogin() {
     if (mounted) {
-      context.go("/home");
+      context.go(AppRoutes.home);
     }
     if (_formKey.currentState!.validate()) {
       setState(() {
@@ -41,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
           setState(() {
             _isLoading = false;
           });
-          context.go('/home');
+          context.go(AppRoutes.home);
         }
       });
     }
@@ -293,7 +294,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: _buildSocialButton(
                             svgPath: 'google',
                             onTap: () {
-                              context.go('/home');
+                              context.go(AppRoutes.home);
                             },
                           ),
                         ),
@@ -302,7 +303,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: _buildSocialButton(
                             svgPath: 'apple',
                             onTap: () {
-                              context.go('/home');
+                              context.go(AppRoutes.home);
                             },
                           ),
                         ),
@@ -311,7 +312,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: _buildSocialButton(
                             svgPath: 'facebook',
                             onTap: () {
-                              context.go('/home');
+                              context.go(AppRoutes.home);
                             },
                           ),
                         ),

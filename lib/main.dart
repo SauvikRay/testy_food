@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:testy_food/core/routes/app_routes.dart';
 import 'core/di/injection.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/pages/login_screen.dart';
@@ -15,22 +16,22 @@ void main() {
 }
 
 final _router = GoRouter(
-  initialLocation: '/',
+  initialLocation: AppRoutes.splash,
   routes: [
     GoRoute(
-      path: '/',
+      path: AppRoutes.splash,
       builder: (context, state) => const SplashScreen(),
     ),
     GoRoute(
-      path: '/onboarding',
+      path: AppRoutes.onboarding,
       builder: (context, state) => const OnboardingPage(),
     ),
     GoRoute(
-      path: '/login',
+      path: AppRoutes.login,
       builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
-      path: '/home',
+      path: AppRoutes.home,
       builder: (context, state) => const HomePage(),
     ),
   ],
@@ -45,7 +46,6 @@ class MyApp extends StatelessWidget {
       title: 'Vibrant Gourmet',
       theme: AppTheme.lightTheme,
       routerConfig: _router,
-      debugShowCheckedModeBanner: false,
     );
   }
 }
