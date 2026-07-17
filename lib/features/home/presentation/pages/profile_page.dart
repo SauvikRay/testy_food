@@ -76,11 +76,13 @@ class ProfilePage extends StatelessWidget {
             32.height,
 
             // Profile actions list
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
+            Material(
+              color: Colors.white,
+              borderRadius: AppSpacing.borderRadiusLG,
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
                 borderRadius: AppSpacing.borderRadiusLG,
-                border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.5)),
+                side: BorderSide(color: AppColors.outlineVariant.withValues(alpha: 0.5)),
               ),
               child: Column(
                 children: [

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:testy_food/core/routes/app_routes.dart';
 import 'package:testy_food/core/theme/app_colors.dart';
-import 'package:testy_food/core/theme/app_text_styles.dart';
+import 'package:testy_food/features/main/presentation/foodapp_tabbar.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget child;
@@ -55,84 +55,25 @@ class MainLayout extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      // extendBody: true allows the body content to scroll behind the floating bottom bar
-      extendBody: true,
       body: child,
-      bottomNavigationBar: SafeArea(
-        child: Container(
-          height: 72,
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.94),
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.08),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
-              ),
-            ],
-            border: Border.all(
-              color: Colors.white.withValues(alpha: 0.8),
-              width: 1.5,
-            ),
+      bottomNavigationBar: FoodAppTabBar(
+        currentIndex: selectedIndex,
+        activeColor: AppColors.primary,
+        inactiveColor: AppColors.outline,
+        backgroundColor: Colors.white.withValues(alpha: 0.85),
+        onTap: (int index) => _onItemTapped(index, context),
+        items: [
+          FoodAppNavigationBarItem(icon: const Icon(Icons.home), label: 'Home'),
+          FoodAppNavigationBarItem(icon: const Icon(Icons.search), label: 'Search'),
+          FoodAppNavigationBarItem(
+            icon: const Icon(Icons.receipt_long),
+            label: 'Orders',
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(context, 0, Icons.home_rounded, 'Home', selectedIndex == 0),
-              _buildNavItem(context, 1, Icons.search_rounded, 'Search', selectedIndex == 1),
-              _buildNavItem(context, 2, Icons.shopping_basket_rounded, 'Cart', selectedIndex == 2),
-              _buildNavItem(context, 3, Icons.favorite_rounded, 'Wishlist', selectedIndex == 3),
-              _buildNavItem(context, 4, Icons.person_rounded, 'Profile', selectedIndex == 4),
-            ],
+          FoodAppNavigationBarItem(
+            icon: const Icon(Icons.favorite),
+            label: 'Wishlist',
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(
-    BuildContext context,
-    int index,
-    IconData icon,
-    String label,
-    bool isSelected,
-  ) {
-    return GestureDetector(
-      onTap: () => _onItemTapped(index, context),
-      behavior: HitTestBehavior.opaque,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 250),
-            curve: Curves.easeInOut,
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: isSelected
-                  ? AppColors.primary.withValues(alpha: 0.1)
-                  : Colors.transparent,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              color: isSelected ? AppColors.primary : AppColors.outline,
-              size: 24,
-            ),
-          ),
-          const SizedBox(height: 2),
-          AnimatedDefaultTextStyle(
-            duration: const Duration(milliseconds: 200),
-            style: AppTextStyles.labelSmall.copyWith(
-              fontSize: 10,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-              color: isSelected ? AppColors.primary : AppColors.outline,
-            ),
-            child: Text(label),
-          ),
+          FoodAppNavigationBarItem(icon: const Icon(Icons.person), label: 'Profile'),
         ],
       ),
     );
