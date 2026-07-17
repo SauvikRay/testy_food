@@ -329,9 +329,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: AppTextStyles.bodyMedium,
                         ),
                         GestureDetector(
-                          onTap: () {
-                            // Mock create account
-                          },
+                          onTap: () => context.go(AppRoutes.register),
                           child: Text(
                             ' Create Account',
                             style: AppTextStyles.labelLarge.copyWith(
