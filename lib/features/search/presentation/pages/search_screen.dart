@@ -4,6 +4,7 @@ import 'package:testy_food/core/routes/app_routes.dart';
 import 'package:testy_food/core/theme/app_colors.dart';
 import 'package:testy_food/core/theme/app_spacing.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
+import 'package:testy_food/core/utils/keyboard_utils.dart';
 import 'package:testy_food/core/widgets/common_cached_network_image.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -99,6 +100,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               controller: _searchController,
                               autofocus: true,
                               textInputAction: TextInputAction.search,
+                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,

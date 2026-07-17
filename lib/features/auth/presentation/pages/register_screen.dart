@@ -4,6 +4,7 @@ import 'package:testy_food/core/routes/app_routes.dart';
 import 'package:testy_food/core/theme/app_colors.dart';
 import 'package:testy_food/core/theme/app_spacing.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
+import 'package:testy_food/core/utils/keyboard_utils.dart';
 import 'package:testy_food/core/widgets/common_button.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -143,6 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               keyboardType: TextInputType.name,
                               textInputAction: TextInputAction.next,
                               style: AppTextStyles.bodyLarge,
+                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
                               decoration: const InputDecoration(
                                 hintText: 'Full Name',
                                 prefixIcon: Icon(
@@ -166,6 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               textInputAction: TextInputAction.next,
                               autofillHints: const [AutofillHints.email],
                               style: AppTextStyles.bodyLarge,
+                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
                               decoration: const InputDecoration(
                                 hintText: 'Email Address',
                                 prefixIcon: Icon(
@@ -193,6 +196,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               textInputAction: TextInputAction.next,
                               autofillHints: const [AutofillHints.newPassword],
                               style: AppTextStyles.bodyLarge,
+                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
                               decoration: InputDecoration(
                                 hintText: 'Password',
                                 prefixIcon: const Icon(
@@ -231,6 +235,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               obscureText: _obscureConfirmPassword,
                               textInputAction: TextInputAction.done,
                               style: AppTextStyles.bodyLarge,
+                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
                               decoration: InputDecoration(
                                 hintText: 'Confirm Password',
                                 prefixIcon: const Icon(

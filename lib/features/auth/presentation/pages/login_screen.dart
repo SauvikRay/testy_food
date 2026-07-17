@@ -4,6 +4,7 @@ import 'package:testy_food/core/theme/app_colors.dart';
 import 'package:testy_food/core/theme/app_spacing.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
 import 'package:testy_food/core/routes/app_routes.dart';
+import 'package:testy_food/core/utils/keyboard_utils.dart';
 import 'package:testy_food/core/widgets/common_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -167,6 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: _emailController,
                               keyboardType: TextInputType.emailAddress,
                               style: AppTextStyles.bodyLarge,
+                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
                               decoration: const InputDecoration(
                                 hintText: 'name@example.com',
                                 prefixIcon: Icon(
@@ -219,6 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: _passwordController,
                               obscureText: _obscurePassword,
                               style: AppTextStyles.bodyLarge,
+                              onTapOutside: (event) => KeyboardUtils.hideKyBoard(context),
                               decoration: InputDecoration(
                                 hintText: 'Enter your password',
                                 prefixIcon: const Icon(
