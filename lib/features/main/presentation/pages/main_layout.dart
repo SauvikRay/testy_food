@@ -7,10 +7,7 @@ import 'package:testy_food/core/theme/app_text_styles.dart';
 class MainLayout extends StatelessWidget {
   final Widget child;
 
-  const MainLayout({
-    super.key,
-    required this.child,
-  });
+  const MainLayout({super.key, required this.child});
 
   int _calculateSelectedIndex(BuildContext context) {
     final String location = GoRouterState.of(context).uri.toString();
@@ -58,47 +55,85 @@ class MainLayout extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
+      // extendBody: true allows the body content to scroll behind the floating bottom bar
+      extendBody: true,
       body: child,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.04),
-              blurRadius: 10,
-              offset: const Offset(0, -4),
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          height: 72,
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.94),
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.08),
+                blurRadius: 20,
+                offset: const Offset(0, 10),
+              ),
+            ],
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.8),
+              width: 1.5,
             ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(16),
-            topRight: Radius.circular(16),
           ),
-          child: BottomNavigationBar(
-            currentIndex: selectedIndex,
-            selectedItemColor: AppColors.primary,
-            unselectedItemColor: AppColors.outline,
-            backgroundColor: Colors.white.withValues(alpha: 0.85),
-            type: BottomNavigationBarType.fixed,
-            selectedLabelStyle: AppTextStyles.labelSmall.copyWith(
-              fontWeight: FontWeight.bold,
-              fontSize: 11,
-              color: AppColors.primary,
-            ),
-            unselectedLabelStyle: AppTextStyles.labelSmall.copyWith(
-              fontSize: 11,
-              color: AppColors.outline,
-            ),
-            onTap: (int index) => _onItemTapped(index, context),
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-              BottomNavigationBarItem(icon: Icon(Icons.receipt_long), label: 'Orders'),
-              BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Wishlist'),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(context, 0, Icons.home_rounded, 'Home', selectedIndex == 0),
+              _buildNavItem(context, 1, Icons.search_rounded, 'Search', selectedIndex == 1),
+              _buildNavItem(context, 2, Icons.shopping_basket_rounded, 'Cart', selectedIndex == 2),
+              _buildNavItem(context, 3, Icons.favorite_rounded, 'Wishlist', selectedIndex == 3),
+              _buildNavItem(context, 4, Icons.person_rounded, 'Profile', selectedIndex == 4),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(
+    BuildContext context,
+    int index,
+    IconData icon,
+    String label,
+    bool isSelected,
+  ) {
+    return GestureDetector(
+      onTap: () => _onItemTapped(index, context),
+      behavior: HitTestBehavior.opaque,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeInOut,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? AppColors.primary.withValues(alpha: 0.1)
+                  : Colors.transparent,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              icon,
+              color: isSelected ? AppColors.primary : AppColors.outline,
+              size: 24,
+            ),
+          ),
+          const SizedBox(height: 2),
+          AnimatedDefaultTextStyle(
+            duration: const Duration(milliseconds: 200),
+            style: AppTextStyles.labelSmall.copyWith(
+              fontSize: 10,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+              color: isSelected ? AppColors.primary : AppColors.outline,
+            ),
+            child: Text(label),
+          ),
+        ],
       ),
     );
   }
