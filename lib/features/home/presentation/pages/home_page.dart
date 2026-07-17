@@ -21,90 +21,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      // Fixed App Bar
-      appBar: AppBar(
-        backgroundColor: Colors.white.withValues(alpha: 0.8),
-        elevation: 0,
-        scrolledUnderElevation: 2,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Deliver to',
-              style: AppTextStyles.labelSmall.copyWith(
-                color: AppColors.onSurfaceVariant,
-              ),
-            ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.location_on,
-                  color: AppColors.primary,
-                  size: 18,
-                ),
-                4.width,
-                Text(
-                  'Downtown, NY',
-                  style: AppTextStyles.headlineSmall.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(width: 2),
-                Icon(
-                  Icons.expand_more,
-                  color: AppColors.onSurface.withValues(alpha: 0.6),
-                  size: 18,
-                ),
-              ],
-            ),
-          ],
-        ),
-        actions: [
-          // Notification Bell
-          Stack(
-            children: [
-              IconButton(
-                icon: const Icon(
-                  Icons.notifications_none,
-                  color: AppColors.onSurfaceVariant,
-                ),
-                onPressed: () {},
-              ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: Container(
-                  width: 8,
-                  height: 8,
-                  decoration: const BoxDecoration(
-                    color: AppColors.primary,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          // User profile image
-          Padding(
-            padding: const EdgeInsets.only(right: 16, left: 8),
-            child: Container(
-              width: 38,
-              height: 38,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppColors.primary, width: 2),
-                image: const DecorationImage(
-                  image: CachedNetworkImageProvider(
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuC1PIOMXv-lFDkpYRbegTrbmEububZ5yoR7gLG8WVWPHE1p8o5IHy_yRYRpMrRVnzdPMnrbRk9FB9pYSftLVO9BoffS4yBwYu4SQ2-xvpf2U50pYyJCNIuaqtDF9WLxeCr1-HzyAu2wjyGs_xsvoUvJq8e49pgSwU-77hVK1nydTxBgIRK_3Q0NCr-bG_8ABw_ZJhYlC3g74e4mjFfxp3cDK_v1w2zaegugB89QBNUYF9uvml4SqcmbHAqjKCMj_gaLyL5XlJTKulFa',
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-
+      
       // Floating Contextual Track Order Action Button
       floatingActionButton: _selectedNavIndex == 0
           ? FloatingActionButton.extended(
@@ -123,319 +40,447 @@ class _HomePageState extends ConsumerState<HomePage> {
             )
           : null,
 
-      // Scrollable Body
+      // Custom Scroll View for collapsing AppBar effect
       body: _selectedNavIndex == 0
-          ? SingleChildScrollView(
-              padding: AppSpacing.edgeMD,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Greeting
-                  Text(
-                    'Good Morning, Alex!',
-                    style: AppTextStyles.headlineMedium.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    'What are you craving today?',
-                    style: AppTextStyles.bodyMedium,
-                  ),
-                  16.height,
-
-                  // Search bar + Filter button
-                  Row(
+          ? CustomScrollView(
+              slivers: [
+                // 1. Collapsible AppBar (floating & snap back)
+                SliverAppBar(
+                  floating: true,
+                  snap: true,
+                  pinned: false,
+                  backgroundColor: AppColors.background,
+                  elevation: 0,
+                  scrolledUnderElevation: 0,
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Container(
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: AppSpacing.borderRadiusLG,
-                            border: Border.all(
-                              color: AppColors.outlineVariant.withValues(
-                                alpha: 0.5,
-                              ),
+                      Text(
+                        'Deliver to',
+                        style: AppTextStyles.labelSmall.copyWith(
+                          color: AppColors.onSurfaceVariant,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on,
+                            color: AppColors.primary,
+                            size: 18,
+                          ),
+                          4.width,
+                          Text(
+                            'Downtown, NY',
+                            style: AppTextStyles.headlineSmall.copyWith(
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          child: Row(
-                            children: [
-                              16.width,
-                              const Icon(
-                                Icons.search,
-                                color: AppColors.outline,
+                          const SizedBox(width: 2),
+                          Icon(
+                            Icons.expand_more,
+                            color: AppColors.onSurface.withValues(alpha: 0.6),
+                            size: 18,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  actions: [
+                    // Notification Bell
+                    Stack(
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.notifications_none,
+                            color: AppColors.onSurfaceVariant,
+                          ),
+                          onPressed: () {},
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: Container(
+                            width: 8,
+                            height: 8,
+                            decoration: const BoxDecoration(
+                              color: AppColors.primary,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // User profile image
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16, left: 8),
+                      child: Container(
+                        width: 38,
+                        height: 38,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: AppColors.primary, width: 2),
+                          image: const DecorationImage(
+                            image: CachedNetworkImageProvider(
+                              'https://lh3.googleusercontent.com/aida-public/AB6AXuC1PIOMXv-lFDkpYRbegTrbmEububZ5yoR7gLG8WVWPHE1p8o5IHy_yRYRpMrRVnzdPMnrbRk9FB9pYSftLVO9BoffS4yBwYu4SQ2-xvpf2U50pYyJCNIuaqtDF9WLxeCr1-HzyAu2wjyGs_xsvoUvJq8e49pgSwU-77hVK1nydTxBgIRK_3Q0NCr-bG_8ABw_ZJhYlC3g74e4mjFfxp3cDK_v1w2zaegugB89QBNUYF9uvml4SqcmbHAqjKCMj_gaLyL5XlJTKulFa',
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                // 2. Greeting Header Section
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Good Morning, Alex!',
+                          style: AppTextStyles.headlineMedium.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          'What are you craving today?',
+                          style: AppTextStyles.bodyMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                // 3. Pinned Search Bar & Filter Header
+                SliverPersistentHeader(
+                  pinned: true,
+                  delegate: _SliverSearchDelegate(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 48,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: AppSpacing.borderRadiusLG,
+                              border: Border.all(
+                                color: AppColors.outlineVariant.withValues(
+                                  alpha: 0.5,
+                                ),
                               ),
-                              16.width,
-                              Expanded(
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    hintText: 'Search for food or restaurants',
-                                    hintStyle: AppTextStyles.bodyMedium
-                                        .copyWith(color: AppColors.outline),
+                            ),
+                            child: Row(
+                              children: [
+                                16.width,
+                                const Icon(
+                                  Icons.search,
+                                  color: AppColors.outline,
+                                ),
+                                16.width,
+                                Expanded(
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      hintText: 'Search for food or restaurants',
+                                      hintStyle: AppTextStyles.bodyMedium
+                                          .copyWith(color: AppColors.outline),
+                                    ),
+                                  ),
+                                ),
+                                const Icon(Icons.mic, color: AppColors.primary),
+                                16.width,
+                              ],
+                            ),
+                          ),
+                        ),
+                        16.width,
+                        Container(
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: AppSpacing.borderRadiusLG,
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.primary.withValues(alpha: 0.2),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: const Icon(Icons.tune, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                // 4. Main Scrollable Dashboard Content
+                SliverToBoxAdapter(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      12.height,
+                      
+                      // Offer Banner
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Container(
+                          height: 180,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24),
+                            gradient: const LinearGradient(
+                              colors: [AppColors.primary, AppColors.secondary],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.primary.withValues(alpha: 0.15),
+                                blurRadius: 12,
+                                offset: const Offset(0, 6),
+                              ),
+                            ],
+                          ),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                left: 20,
+                                top: 20,
+                                bottom: 20,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'FLASH SALE',
+                                      style: AppTextStyles.labelLarge.copyWith(
+                                        color: Colors.white70,
+                                        letterSpacing: 1.5,
+                                      ),
+                                    ),
+                                    4.height,
+                                    Text(
+                                      '50% OFF\non Italian!',
+                                      style: AppTextStyles.headlineLargeMobile
+                                          .copyWith(
+                                            color: Colors.white,
+                                            height: 1.2,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                    16.height,
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.white,
+                                        foregroundColor: AppColors.primary,
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                          vertical: 8,
+                                        ),
+                                        minimumSize: Size.zero,
+                                        tapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                        elevation: 0,
+                                      ),
+                                      child: Text(
+                                        'Order Now',
+                                        style: AppTextStyles.labelSmall.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primary,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              // Floating Pizza Image on right
+                              Positioned(
+                                right: -30,
+                                bottom: -30,
+                                top: -10,
+                                child: Transform.rotate(
+                                  angle: -0.15,
+                                  child: SizedBox(
+                                    width: 220,
+                                    child: CommonCachedNetworkImage(
+                                      imageUrl:
+                                          'https://lh3.googleusercontent.com/aida-public/AB6AXuAnH6fy7YzqI-L_MAVW8Zlzt9ndPbJPjaFHQ-smxVYneBJEJkSzxCpWssRMsWFgu2P_dErCoLCQDAEcXA52goVWuJe0YEklBf9pIb2gtyJ5AwoC3G0h0Al9g89CRwQbinnrD1IDUPOi2_9dw0UgGAUTnxfmpkydSFEhUyzyAwivmrFUx9Y_XU9f_NBP_MJYwhgfZwFQD5GdOr9GoqwH4FLTrf4KdLfDRQBEg1CTV1LbPYO_Mk-dZe0BaQXaGIC5fvfw7TbYGqaRzMsZ',
+                                      fit: BoxFit.contain,
+                                    ),
                                   ),
                                 ),
                               ),
-                              const Icon(Icons.mic, color: AppColors.primary),
-                              16.width,
                             ],
                           ),
                         ),
                       ),
-                      16.width,
-                      Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: AppSpacing.borderRadiusLG,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.primary.withValues(alpha: 0.2),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
+                      24.height,
+
+                      // Categories Section
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Categories',
+                              style: AppTextStyles.headlineSmall.copyWith(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'See All',
+                                style: AppTextStyles.labelLarge.copyWith(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ),
                           ],
                         ),
-                        child: const Icon(Icons.tune, color: Colors.white),
                       ),
-                    ],
-                  ),
-                  24.height,
+                      8.height,
+                      SizedBox(
+                        height: 96,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          clipBehavior: Clip.none,
+                          children: [
+                            _buildCategoryItem('Pizza', Icons.local_pizza),
+                            _buildCategoryItem('Burger', Icons.lunch_dining),
+                            _buildCategoryItem('Chinese', Icons.ramen_dining),
+                            _buildCategoryItem('Dessert', Icons.icecream),
+                            _buildCategoryItem('Drinks', Icons.local_bar),
+                            _buildCategoryItem('Bakery', Icons.bakery_dining),
+                          ],
+                        ),
+                      ),
+                      24.height,
 
-                  // Offer Banner
-                  Container(
-                    height: 180,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      gradient: const LinearGradient(
-                        colors: [AppColors.primary, AppColors.secondary],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.primary.withValues(alpha: 0.15),
-                          blurRadius: 12,
-                          offset: const Offset(0, 6),
-                        ),
-                      ],
-                    ),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          left: 20,
-                          top: 20,
-                          bottom: 20,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'FLASH SALE',
-                                style: AppTextStyles.labelLarge.copyWith(
-                                  color: Colors.white70,
-                                  letterSpacing: 1.5,
-                                ),
-                              ),
-                              4.height,
-                              Text(
-                                '50% OFF\non Italian!',
-                                style: AppTextStyles.headlineLargeMobile
-                                    .copyWith(
-                                      color: Colors.white,
-                                      height: 1.2,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              16.height,
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: AppColors.primary,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 8,
-                                  ),
-                                  minimumSize: Size.zero,
-                                  tapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  elevation: 0,
-                                ),
-                                child: Text(
-                                  'Order Now',
-                                  style: AppTextStyles.labelSmall.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.primary,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Floating Pizza Image on right
-                        Positioned(
-                          right: -30,
-                          bottom: -30,
-                          top: -10,
-                          child: Transform.rotate(
-                            angle: -0.15,
-                            child: SizedBox(
-                              width: 220,
-                              child: CommonCachedNetworkImage(
-                                imageUrl:
-                                    'https://lh3.googleusercontent.com/aida-public/AB6AXuAnH6fy7YzqI-L_MAVW8Zlzt9ndPbJPjaFHQ-smxVYneBJEJkSzxCpWssRMsWFgu2P_dErCoLCQDAEcXA52goVWuJe0YEklBf9pIb2gtyJ5AwoC3G0h0Al9g89CRwQbinnrD1IDUPOi2_9dw0UgGAUTnxfmpkydSFEhUyzyAwivmrFUx9Y_XU9f_NBP_MJYwhgfZwFQD5GdOr9GoqwH4FLTrf4KdLfDRQBEg1CTV1LbPYO_Mk-dZe0BaQXaGIC5fvfw7TbYGqaRzMsZ',
-                                fit: BoxFit.contain,
+                      // Popular Restaurants Section
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Popular Restaurants',
+                              style: AppTextStyles.headlineSmall.copyWith(
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  24.height,
-
-                  // Categories Section
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Categories',
-                        style: AppTextStyles.headlineSmall.copyWith(
-                          fontWeight: FontWeight.w700,
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'View All',
+                                style: AppTextStyles.labelLarge.copyWith(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {},
+                      8.height,
+                      SizedBox(
+                        height: 236,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          clipBehavior: Clip.none,
+                          children: [
+                            _buildRestaurantCard(
+                              name: 'The Golden Truffle',
+                              rating: '4.8',
+                              time: '20-30 min',
+                              categories: 'European • Fine Dining • \$\$\$',
+                              imageUrl:
+                                  'https://lh3.googleusercontent.com/aida-public/AB6AXuD6ZEcIwkG5YQe0tASRrchXkZjxgT70y73F2WLNXBy7T_LiPCK2T_hz4wwFtGCknqtRlKbd_JfyXO2rlGgqcA-Oq4uTkZjdXLj6l5FGtwURklNa8LIgCSkFL0W6Xio0yP-5DYC6AS2HSY9wRxffxd-t4ig4KqCo_5o6Y-tY71ynlZCRj8o7Umx44jr9doWsm0QXDI05X_-WCPxlesMSCe_2AlTuRoVw8sjZHoTRskqC3hmzT_Odt6eFF53iTdeygBASIAPwZYHfMikI',
+                            ),
+                            16.width,
+                            _buildRestaurantCard(
+                              name: 'Sushiko Urban',
+                              rating: '4.5',
+                              time: '15-25 min',
+                              categories: 'Japanese • Sushi • \$\$',
+                              imageUrl:
+                                  'https://lh3.googleusercontent.com/aida-public/AB6AXuCk71WN9fK3PlSKqQ5_f91QTSZ3Z3pZR92jSo0FJrropNsWvUcAs8_6OSnFai9IHQM3fP4c3NgFUMuzuJRyAWfzLoZs18_9G2gsNIR5P0VbeSAFBSKVzjy01tm5woEXk3z3UQO15Qth0jaXIh7CoI21Da7CqmAZGcM0B5pLBGyQO21c6BMX9lWRlsuBCN-pdCuFGE_v1uLAZLWsUS7OTOEqS87JmOTaVMsgZ0BDNUoMN4X1tpwwb2L-peBVD0SM3xPmKNlkL7xB9kYd',
+                            ),
+                          ],
+                        ),
+                      ),
+                      24.height,
+
+                      // Recommended for you Section
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
-                          'See All',
-                          style: AppTextStyles.labelLarge.copyWith(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w600,
+                          'Recommended for You',
+                          style: AppTextStyles.headlineSmall.copyWith(
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  8.height,
-                  SizedBox(
-                    height: 96,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      clipBehavior: Clip.none,
-                      children: [
-                        _buildCategoryItem('Pizza', Icons.local_pizza),
-                        _buildCategoryItem('Burger', Icons.lunch_dining),
-                        _buildCategoryItem('Chinese', Icons.ramen_dining),
-                        _buildCategoryItem('Dessert', Icons.icecream),
-                        _buildCategoryItem('Drinks', Icons.local_bar),
-                        _buildCategoryItem('Bakery', Icons.bakery_dining),
-                      ],
-                    ),
-                  ),
-                  24.height,
-
-                  // Popular Restaurants Section
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Popular Restaurants',
-                        style: AppTextStyles.headlineSmall.copyWith(
-                          fontWeight: FontWeight.w700,
+                      16.height,
+                      
+                      // Recommendations Bento/Grid-list style
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: GridView.count(
+                          crossAxisCount: 2,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 16,
+                          childAspectRatio: 0.8,
+                          children: [
+                            _buildGridFoodItem(
+                              name: 'Classic Wagyu Burger',
+                              price: '\$18.50',
+                              rating: '4.9',
+                              imageUrl:
+                                  'https://lh3.googleusercontent.com/aida-public/AB6AXuAx7qWbnrecqMf0mtjbBV2gDGNE1UOG64xVzoMaP4chs4dhIBFXP7ef1cwqGDGayjkqEs9F5HJd2C0K7SCV-65WMENqCCOuTx2SrYCBIFO4wkq7cxRu6Ka9egABUZI0XbptOiAYAwchlUVHqD9lyyjLf2FqrFh0sEfD-pQRWEs5fNZlNs1InBYgAw9aJ6HvP5T6E41qQ0EVzTj2W1EZLwRw98VcPzk-Vc2C2q3HVf2VoB8xC-Fse08s7q1iWJWGN2F14a_PgDdf6_BJ',
+                            ),
+                            _buildGridFoodItem(
+                              name: 'Modern Greek Salad',
+                              price: '\$12.00',
+                              rating: '4.7',
+                              imageUrl:
+                                  'https://lh3.googleusercontent.com/aida-public/AB6AXuB4zc4EFdiLhhT_XDDM0JvYf0gHwH5Lz6-iBpKaL5-nrHS8BECDnSJjWe6cFIrZxw0aALv5W5QvTSJkZnpeKogGA_eKhDlz5218veK58SHUUafPasXAKWpSOg4MYw-PZbeYBwbADwY7uz79ppEwxAu95rejxYSi_-OPwJ3p7E69BKkeRM42AdgZFvnYJbykmYmACW5cJJoqc7v9x4NeT0IY2urTAotww5AWMtjBdUe-D2mjr0xa6aMT8fwS7swpYEhHyj2lSUkqsC1P',
+                            ),
+                          ],
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'View All',
-                          style: AppTextStyles.labelLarge.copyWith(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  8.height,
-                  SizedBox(
-                    height: 236,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      clipBehavior: Clip.none,
-                      children: [
-                        _buildRestaurantCard(
-                          name: 'The Golden Truffle',
-                          rating: '4.8',
-                          time: '20-30 min',
-                          categories: 'European • Fine Dining • \$\$\$',
+                      16.height,
+                      
+                      // Full-width Recommended item
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: _buildFullWidthFoodItem(
+                          name: 'Signature Lava Delight',
+                          description:
+                              'Rich Belgian chocolate with a warm flowing center served with fresh berries.',
+                          price: '\$9.50',
                           imageUrl:
-                              'https://lh3.googleusercontent.com/aida-public/AB6AXuD6ZEcIwkG5YQe0tASRrchXkZjxgT70y73F2WLNXBy7T_LiPCK2T_hz4wwFtGCknqtRlKbd_JfyXO2rlGgqcA-Oq4uTkZjdXLj6l5FGtwURklNa8LIgCSkFL0W6Xio0yP-5DYC6AS2HSY9wRxffxd-t4ig4KqCo_5o6Y-tY71ynlZCRj8o7Umx44jr9doWsm0QXDI05X_-WCPxlesMSCe_2AlTuRoVw8sjZHoTRskqC3hmzT_Odt6eFF53iTdeygBASIAPwZYHfMikI',
+                              'https://lh3.googleusercontent.com/aida-public/AB6AXuDLvTwhucmZgHjg3i4xW3WEiuTUstjDYpNIAWV7P834zrRA571PVrSMKQ5dy6sXHbaq0pajIXyZDdUbfGssfD2RJp1yuL7cuTQfJpkGwZpMKMjs6o-MYCyclqyROYPRaJSPYJdc48VDCM0KToJll4RILQfxkmWe3tqn47Mm-5Io2AkZ2qBkRxZDbzOrYVEtYoG3N2opYVVAdT5cMotfHCTo8a_Hj_rbzbrM7vuvwAvmx3IHgqd5uGLULnru20S28hm5rIxBi6CsoCb6',
                         ),
-                        16.width,
-                        _buildRestaurantCard(
-                          name: 'Sushiko Urban',
-                          rating: '4.5',
-                          time: '15-25 min',
-                          categories: 'Japanese • Sushi • \$\$',
-                          imageUrl:
-                              'https://lh3.googleusercontent.com/aida-public/AB6AXuCk71WN9fK3PlSKqQ5_f91QTSZ3Z3pZR92jSo0FJrropNsWvUcAs8_6OSnFai9IHQM3fP4c3NgFUMuzuJRyAWfzLoZs18_9G2gsNIR5P0VbeSAFBSKVzjy01tm5woEXk3z3UQO15Qth0jaXIh7CoI21Da7CqmAZGcM0B5pLBGyQO21c6BMX9lWRlsuBCN-pdCuFGE_v1uLAZLWsUS7OTOEqS87JmOTaVMsgZ0BDNUoMN4X1tpwwb2L-peBVD0SM3xPmKNlkL7xB9kYd',
-                        ),
-                      ],
-                    ),
-                  ),
-                  24.height,
-
-                  // Recommended for you Section
-                  Text(
-                    'Recommended for You',
-                    style: AppTextStyles.headlineSmall.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  16.height,
-                  // Recommendations Bento/Grid-list style
-                  GridView.count(
-                    crossAxisCount: 2,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    childAspectRatio: 0.8,
-                    children: [
-                      _buildGridFoodItem(
-                        name: 'Classic Wagyu Burger',
-                        price: '\$18.50',
-                        rating: '4.9',
-                        imageUrl:
-                            'https://lh3.googleusercontent.com/aida-public/AB6AXuAx7qWbnrecqMf0mtjbBV2gDGNE1UOG64xVzoMaP4chs4dhIBFXP7ef1cwqGDGayjkqEs9F5HJd2C0K7SCV-65WMENqCCOuTx2SrYCBIFO4wkq7cxRu6Ka9egABUZI0XbptOiAYAwchlUVHqD9lyyjLf2FqrFh0sEfD-pQRWEs5fNZlNs1InBYgAw9aJ6HvP5T6E41qQ0EVzTj2W1EZLwRw98VcPzk-Vc2C2q3HVf2VoB8xC-Fse08s7q1iWJWGN2F14a_PgDdf6_BJ',
                       ),
-                      _buildGridFoodItem(
-                        name: 'Modern Greek Salad',
-                        price: '\$12.00',
-                        rating: '4.7',
-                        imageUrl:
-                            'https://lh3.googleusercontent.com/aida-public/AB6AXuB4zc4EFdiLhhT_XDDM0JvYf0gHwH5Lz6-iBpKaL5-nrHS8BECDnSJjWe6cFIrZxw0aALv5W5QvTSJkZnpeKogGA_eKhDlz5218veK58SHUUafPasXAKWpSOg4MYw-PZbeYBwbADwY7uz79ppEwxAu95rejxYSi_-OPwJ3p7E69BKkeRM42AdgZFvnYJbykmYmACW5cJJoqc7v9x4NeT0IY2urTAotww5AWMtjBdUe-D2mjr0xa6aMT8fwS7swpYEhHyj2lSUkqsC1P',
-                      ),
+                      80.height,
                     ],
                   ),
-                  16.height,
-                  // Full-width Recommended item
-                  _buildFullWidthFoodItem(
-                    name: 'Signature Lava Delight',
-                    description:
-                        'Rich Belgian chocolate with a warm flowing center served with fresh berries.',
-                    price: '\$9.50',
-                    imageUrl:
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuDLvTwhucmZgHjg3i4xW3WEiuTUstjDYpNIAWV7P834zrRA571PVrSMKQ5dy6sXHbaq0pajIXyZDdUbfGssfD2RJp1yuL7cuTQfJpkGwZpMKMjs6o-MYCyclqyROYPRaJSPYJdc48VDCM0KToJll4RILQfxkmWe3tqn47Mm-5Io2AkZ2qBkRxZDbzOrYVEtYoG3N2opYVVAdT5cMotfHCTo8a_Hj_rbzbrM7vuvwAvmx3IHgqd5uGLULnru20S28hm5rIxBi6CsoCb6',
-                  ),
-                  80.height, // Padding for Floating button / navigation bar spacer
-                ],
-              ),
+                ),
+              ],
             )
           : const Center(
               child: Text(
@@ -877,4 +922,45 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
     );
   }
+}
+
+// Custom Sliver Delegate for the search header that pins at the top of the screen
+class _SliverSearchDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _SliverSearchDelegate({required this.child});
+
+  @override
+  double get minExtent => 72.0;
+
+  @override
+  double get maxExtent => 72.0;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.background.withValues(alpha: 0.95),
+        boxShadow: overlapsContent
+            ? [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                )
+              ]
+            : null,
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      alignment: Alignment.center,
+      child: child,
+    );
+  }
+
+  @override
+  bool shouldRebuild(covariant _SliverSearchDelegate oldDelegate) => false;
 }
