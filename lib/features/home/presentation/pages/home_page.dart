@@ -93,7 +93,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         Icons.notifications_none,
                         color: AppColors.onSurfaceVariant,
                       ),
-                      onPressed: () => context.go(AppRoutes.search),
+                      onPressed: () => context.go(AppRoutes.notifications),
                     ),
                     Positioned(
                       top: 10,
@@ -298,7 +298,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   ),
                                   16.height,
                                   ElevatedButton(
-                                    onPressed: () => context.go(AppRoutes.restaurantList),
+                                    onPressed: () => context.go(AppRoutes.offers),
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.white,
                                       foregroundColor: AppColors.primary,

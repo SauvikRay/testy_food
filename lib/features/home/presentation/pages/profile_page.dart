@@ -86,15 +86,18 @@ class ProfilePage extends StatelessWidget {
             // Profile actions list
             Material(
               color: Colors.white,
-              borderRadius: AppSpacing.borderRadiusLG,
               clipBehavior: Clip.antiAlias,
-              // shape: RoundedRectangleBorder(
-              //   borderRadius: AppSpacing.borderRadiusLG,
-              //   side: BorderSide(color: AppColors.outlineVariant.withValues(alpha: 0.5)),
-              // ),
+              shape: RoundedRectangleBorder(
+                borderRadius: AppSpacing.borderRadiusLG,
+                side: BorderSide(color: AppColors.outlineVariant.withValues(alpha: 0.5)),
+              ),
               child: Column(
                 children: [
-                  _buildProfileTile(Icons.shopping_bag_outlined, 'My Orders'),
+                  _buildProfileTile(
+                    Icons.shopping_bag_outlined,
+                    'My Orders',
+                    onTap: () => context.go(AppRoutes.orderHistory),
+                  ),
                   const Divider(height: 1, color: AppColors.outlineVariant),
                   _buildProfileTile(
                     Icons.favorite_border,
@@ -105,9 +108,26 @@ class ProfilePage extends StatelessWidget {
                   _buildProfileTile(
                     Icons.location_on_outlined,
                     'Delivery Addresses',
+                    onTap: () => context.go(AppRoutes.savedAddresses),
                   ),
                   const Divider(height: 1, color: AppColors.outlineVariant),
-                  _buildProfileTile(Icons.payment_outlined, 'Payment Methods'),
+                  _buildProfileTile(
+                    Icons.payment_outlined,
+                    'Payment Methods',
+                    onTap: () => context.go(AppRoutes.paymentMethods),
+                  ),
+                  const Divider(height: 1, color: AppColors.outlineVariant),
+                  _buildProfileTile(
+                    Icons.help_outline_rounded,
+                    'Help & Support',
+                    onTap: () => context.go(AppRoutes.helpSupport),
+                  ),
+                  const Divider(height: 1, color: AppColors.outlineVariant),
+                  _buildProfileTile(
+                    Icons.settings_outlined,
+                    'Settings',
+                    onTap: () => context.go(AppRoutes.settings),
+                  ),
                   const Divider(height: 1, color: AppColors.outlineVariant),
                   _buildProfileTile(
                     Icons.logout,

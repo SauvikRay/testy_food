@@ -17,65 +17,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   String _selectedPayment = 'Credit Card';
 
   void _handlePlaceOrder() {
-    // Show order success bottom sheet or dialog
-    showModalBottomSheet(
-      context: context,
-      isDismissible: false,
-      enableDrag: false,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(24),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(32),
-              topRight: Radius.circular(32),
-            ),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.primaryContainer.withValues(alpha: 0.1),
-                ),
-                child: const Icon(
-                  Icons.check_circle,
-                  color: AppColors.primary,
-                  size: 48,
-                ),
-              ),
-              24.height,
-              Text(
-                'Order Placed Successfully!',
-                style: AppTextStyles.headlineMedium.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              12.height,
-              Text(
-                'Your meal is being prepared and will be delivered shortly.',
-                textAlign: TextAlign.center,
-                style: AppTextStyles.bodyMedium,
-              ),
-              32.height,
-              CommonButton(
-                text: 'Track Order',
-                onPressed: () {
-                  Navigator.pop(context); // Close sheet
-                  context.go(AppRoutes.home); // Go home
-                },
-              ),
-              12.height,
-            ],
-          ),
-        );
-      },
-    );
+    context.go(AppRoutes.orderSuccess);
   }
 
   @override
