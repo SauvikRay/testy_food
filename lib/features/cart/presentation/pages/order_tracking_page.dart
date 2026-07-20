@@ -13,8 +13,25 @@ class OrderTrackingPage extends StatefulWidget {
   State<OrderTrackingPage> createState() => _OrderTrackingPageState();
 }
 
-class _OrderTrackingPageState extends State<OrderTrackingPage> {
+class _OrderTrackingPageState extends State<OrderTrackingPage>
+    with SingleTickerProviderStateMixin {
   final int _activeStep = 2; // Default to "Out for Delivery" state for demonstration
+  late final AnimationController _pulseController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pulseController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1800),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _pulseController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,31 +180,65 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
   }
 
   Widget _buildPulsingScooterNode() {
-    return SizedBox(
-      width: 48,
-      height: 48,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            width: 38,
-            height: 38,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.primaryContainer.withValues(alpha: 0.3),
-            ),
+    return AnimatedBuilder(
+      animation: _pulseController,
+      builder: (context, child) {
+        final val = _pulseController.value;
+        return SizedBox(
+          width: 60,
+          height: 60,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Outer pulsing radar ring
+              Opacity(
+                opacity: (1.0 - val) * 0.35,
+                child: Container(
+                  width: 24 + (val * 36),
+                  height: 24 + (val * 36),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.primary.withValues(alpha: 0.4),
+                  ),
+                ),
+              ),
+              // Inner pulsing radar ring
+              Opacity(
+                opacity: (1.0 - val) * 0.6,
+                child: Container(
+                  width: 24 + (val * 20),
+                  height: 24 + (val * 20),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.primary.withValues(alpha: 0.5),
+                  ),
+                ),
+              ),
+              // Center solid scooter pin
+              Container(
+                width: 32,
+                height: 32,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primary,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 4,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.delivery_dining,
+                  color: Colors.white,
+                  size: 16,
+                ),
+              ),
+            ],
           ),
-          Container(
-            width: 24,
-            height: 24,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.primary,
-            ),
-            child: const Icon(Icons.delivery_dining, color: Colors.white, size: 14),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 

@@ -5,6 +5,8 @@ import 'package:testy_food/core/theme/app_colors.dart';
 import 'package:testy_food/core/theme/app_spacing.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
 import 'package:testy_food/core/widgets/common_cached_network_image.dart';
+import 'package:testy_food/core/widgets/animated_pressable.dart';
+import 'package:testy_food/core/widgets/animate_in.dart';
 
 class RestaurantDetailsPage extends StatefulWidget {
   const RestaurantDetailsPage({super.key});
@@ -68,9 +70,12 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> with Sing
             ),
             backgroundColor: AppColors.primary,
             flexibleSpace: FlexibleSpaceBar(
-              background: CommonCachedNetworkImage(
-                imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD6ZEcIwkG5YQe0tASRrchXkZjxgT70y73F2WLNXBy7T_LiPCK2T_hz4wwFtGCknqtRlKbd_JfyXO2rlGgqcA-Oq4uTkZjdXLj6l5FGtwURklNa8LIgCSkFL0W6Xio0yP-5DYC6AS2HSY9wRxffxd-t4ig4KqCo_5o6Y-tY71ynlZCRj8o7Umx44jr9doWsm0QXDI05X_-WCPxlesMSCe_2AlTuRoVw8sjZHoTRskqC3hmzT_Odt6eFF53iTdeygBASIAPwZYHfMikI',
-                fit: BoxFit.cover,
+              background: Hero(
+                tag: 'restaurant-cover-The Golden Truffle',
+                child: CommonCachedNetworkImage(
+                  imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD6ZEcIwkG5YQe0tASRrchXkZjxgT70y73F2WLNXBy7T_LiPCK2T_hz4wwFtGCknqtRlKbd_JfyXO2rlGgqcA-Oq4uTkZjdXLj6l5FGtwURklNa8LIgCSkFL0W6Xio0yP-5DYC6AS2HSY9wRxffxd-t4ig4KqCo_5o6Y-tY71ynlZCRj8o7Umx44jr9doWsm0QXDI05X_-WCPxlesMSCe_2AlTuRoVw8sjZHoTRskqC3hmzT_Odt6eFF53iTdeygBASIAPwZYHfMikI',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -177,14 +182,17 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> with Sing
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   final item = menuItems[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0),
-                    child: _buildMenuItemCard(
-                      context: context,
-                      name: item['name'],
-                      description: item['description'],
-                      price: item['price'],
-                      imageUrl: item['imageUrl'],
+                  return AnimateIn(
+                    delay: Duration(milliseconds: index * 100),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: _buildMenuItemCard(
+                        context: context,
+                        name: item['name'],
+                        description: item['description'],
+                        price: item['price'],
+                        imageUrl: item['imageUrl'],
+                      ),
                     ),
                   );
                 },
@@ -222,7 +230,7 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> with Sing
     required String price,
     required String imageUrl,
   }) {
-    return GestureDetector(
+    return AnimatedPressable(
       onTap: () => context.go(AppRoutes.foodDetails),
       child: Container(
         padding: const EdgeInsets.all(12),
@@ -246,9 +254,12 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> with Sing
               child: SizedBox(
                 width: 80,
                 height: 80,
-                child: CommonCachedNetworkImage(
-                  imageUrl: imageUrl,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: 'food-cover-$name',
+                  child: CommonCachedNetworkImage(
+                    imageUrl: imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

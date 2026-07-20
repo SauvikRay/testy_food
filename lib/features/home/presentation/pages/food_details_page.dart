@@ -6,6 +6,7 @@ import 'package:testy_food/core/theme/app_spacing.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
 import 'package:testy_food/core/widgets/common_button.dart';
 import 'package:testy_food/core/widgets/common_cached_network_image.dart';
+import 'package:testy_food/core/widgets/animated_pressable.dart';
 
 class FoodDetailsPage extends StatefulWidget {
   const FoodDetailsPage({super.key});
@@ -52,10 +53,13 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                     SizedBox(
                       height: 300,
                       width: double.infinity,
-                      child: const CommonCachedNetworkImage(
-                        imageUrl:
-                            'https://lh3.googleusercontent.com/aida-public/AB6AXuAx7qWbnrecqMf0mtjbBV2gDGNE1UOG64xVzoMaP4chs4dhIBFXP7ef1cwqGDGayjkqEs9F5HJd2C0K7SCV-65WMENqCCOuTx2SrYCBIFO4wkq7cxRu6Ka9egABUZI0XbptOiAYAwchlUVHqD9lyyjLf2FqrFh0sEfD-pQRWEs5fNZlNs1InBYgAw9aJ6HvP5T6E41qQ0EVzTj2W1EZLwRw98VcPzk-Vc2C2q3HVf2VoB8xC-Fse08s7q1iWJWGN2F14a_PgDdf6_BJ',
-                        fit: BoxFit.cover,
+                      child: Hero(
+                        tag: 'food-cover-Classic Wagyu Burger',
+                        child: const CommonCachedNetworkImage(
+                          imageUrl:
+                              'https://lh3.googleusercontent.com/aida-public/AB6AXuAx7qWbnrecqMf0mtjbBV2gDGNE1UOG64xVzoMaP4chs4dhIBFXP7ef1cwqGDGayjkqEs9F5HJd2C0K7SCV-65WMENqCCOuTx2SrYCBIFO4wkq7cxRu6Ka9egABUZI0XbptOiAYAwchlUVHqD9lyyjLf2FqrFh0sEfD-pQRWEs5fNZlNs1InBYgAw9aJ6HvP5T6E41qQ0EVzTj2W1EZLwRw98VcPzk-Vc2C2q3HVf2VoB8xC-Fse08s7q1iWJWGN2F14a_PgDdf6_BJ',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Positioned(
@@ -242,7 +246,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
   Widget _buildSizeChip(String size) {
     final active = _selectedSize == size;
     return Expanded(
-      child: GestureDetector(
+      child: AnimatedPressable(
         onTap: () {
           setState(() {
             _selectedSize = size;

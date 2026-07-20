@@ -1,0 +1,433 @@
+Design Driver Management.
+
+Driver Table
+
+Photo
+
+Name
+
+Phone
+
+Vehicle
+
+Online Status
+
+Rating
+
+Orders
+
+Wallet
+
+Verification
+
+Actions
+
+Design Driver Details.
+
+Profile
+
+Vehicle
+
+License
+
+KYC
+
+Current Location
+
+Orders
+
+Earnings
+
+Withdraw History
+
+Ratings
+
+Reviews
+
+Design Live Delivery Dashboard.
+
+Large Google Map
+
+Restaurant
+
+Driver
+
+Customer
+
+ETA
+
+Route
+
+Driver Details
+
+Call
+
+Chat
+
+Delivery Timeline
+
+Design Payment Management.
+
+Revenue
+
+Transactions
+
+Refunds
+
+Withdraw Requests
+
+Restaurant Payments
+
+Driver Payments
+
+Filters
+
+Table
+
+Charts
+
+Design Coupon Management.
+
+Coupon Cards
+
+Flat Discount
+
+Percentage
+
+Free Delivery
+
+Festival
+
+Referral
+
+Birthday
+
+CRUD
+
+Usage Statistics
+
+Design Review Management.
+
+Review Table
+
+Customer
+
+Restaurant
+
+Driver
+
+Food
+
+Rating
+
+Comment
+
+Photos
+
+Reports
+
+Hide Review
+
+Delete
+
+Design Notification Center.
+
+Push Notifications
+
+Email
+
+SMS
+
+Marketing Campaign
+
+Scheduled Notifications
+
+Audience Selection
+
+Compose Message
+
+Design Analytics Dashboard.
+
+Revenue
+
+Orders
+
+Customers
+
+Drivers
+
+Restaurants
+
+Popular Foods
+
+Peak Hours
+
+Conversion
+
+Retention
+
+Maps
+
+Charts
+
+Heatmaps
+
+Design Reports.
+
+Revenue Report
+
+Sales Report
+
+Restaurant Report
+
+Driver Report
+
+Customer Report
+
+Export
+
+PDF
+
+Excel
+
+CSV
+
+Date Filters
+
+Design Support Dashboard.
+
+Support Tickets
+
+Chat
+
+FAQ
+
+Complaint
+
+Assign Agent
+
+Status
+
+Priority
+
+Design CMS.
+
+Homepage Banner
+
+Offers
+
+FAQ
+
+Privacy Policy
+
+Terms
+
+Blogs
+
+Announcements
+
+CRUD Interface
+
+Design Settings.
+
+General
+
+Payments
+
+Notifications
+
+Email
+
+SMS
+
+Google Maps
+
+Firebase
+
+Taxes
+
+Delivery Charges
+
+Languages
+
+Appearance
+
+Design Admin Management.
+
+Admins
+
+Managers
+
+Support Agents
+
+Restaurant Managers
+
+Create Admin
+
+Permissions
+
+Roles
+
+Status
+
+Design Roles & Permissions.
+
+Permission Matrix
+
+Checkbox Table
+
+CRUD Permissions
+
+Users
+
+Orders
+
+Payments
+
+Reports
+
+Restaurants
+
+Drivers
+
+Customers
+
+Analytics
+
+Design Audit Logs.
+
+User
+
+Action
+
+IP Address
+
+Device
+
+Date
+
+Search
+
+Filter
+
+Timeline
+
+Design Admin Profile.
+
+Avatar
+
+Personal Info
+
+Security
+
+Password
+
+Two-factor Authentication
+
+Activity
+
+Devices
+
+Design Notification Templates.
+
+Email Templates
+
+Push Templates
+
+SMS Templates
+
+Variables
+
+Preview
+
+Editor
+
+Create an enterprise design system.
+
+Buttons
+
+Primary
+
+Secondary
+
+Danger
+
+Success
+
+Outlined
+
+Tables
+
+Data Grid
+
+Cards
+
+Charts
+
+Line Chart
+
+Bar Chart
+
+Pie Chart
+
+Area Chart
+
+Filters
+
+Dropdown
+
+Date Picker
+
+Search
+
+Pagination
+
+Sidebar
+
+Top Navigation
+
+Dialogs
+
+Forms
+
+Inputs
+
+File Upload
+
+Checkbox
+
+Switch
+
+Radio
+
+Tabs
+
+Accordions
+
+Badges
+
+Status Chips
+
+Empty States
+
+Loading States
+
+Error States
+
+Skeleton Loading
+
+Icons
+
+Typography
+
+Spacing
+
+Colors
+
+Auto Layout
+
+Responsive Layout
+
+Dark Mode
+
+Component Variants

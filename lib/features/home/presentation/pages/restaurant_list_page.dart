@@ -5,6 +5,8 @@ import 'package:testy_food/core/theme/app_colors.dart';
 import 'package:testy_food/core/theme/app_spacing.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
 import 'package:testy_food/core/widgets/common_cached_network_image.dart';
+import 'package:testy_food/core/widgets/animated_pressable.dart';
+import 'package:testy_food/core/widgets/animate_in.dart';
 
 class RestaurantListPage extends StatelessWidget {
   const RestaurantListPage({super.key});
@@ -67,15 +69,18 @@ class RestaurantListPage extends StatelessWidget {
         itemCount: restaurants.length,
         itemBuilder: (context, index) {
           final rest = restaurants[index];
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: _buildListCard(
-              context: context,
-              name: rest['name'],
-              rating: rest['rating'],
-              time: rest['time'],
-              categories: rest['categories'],
-              imageUrl: rest['imageUrl'],
+          return AnimateIn(
+            delay: Duration(milliseconds: index * 100),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: _buildListCard(
+                context: context,
+                name: rest['name'],
+                rating: rest['rating'],
+                time: rest['time'],
+                categories: rest['categories'],
+                imageUrl: rest['imageUrl'],
+              ),
             ),
           );
         },
@@ -91,7 +96,7 @@ class RestaurantListPage extends StatelessWidget {
     required String categories,
     required String imageUrl,
   }) {
-    return GestureDetector(
+    return AnimatedPressable(
       onTap: () => context.go(AppRoutes.restaurantDetails),
       child: Container(
         decoration: BoxDecoration(
@@ -121,9 +126,12 @@ class RestaurantListPage extends StatelessWidget {
                   child: SizedBox(
                     height: 160,
                     width: double.infinity,
-                    child: CommonCachedNetworkImage(
-                      imageUrl: imageUrl,
-                      fit: BoxFit.cover,
+                    child: Hero(
+                      tag: 'restaurant-cover-$name',
+                      child: CommonCachedNetworkImage(
+                        imageUrl: imageUrl,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),

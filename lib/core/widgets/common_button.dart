@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testy_food/core/theme/app_colors.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
+import 'animated_pressable.dart';
 
 class CommonButton extends StatelessWidget {
   final String text;
@@ -27,7 +28,7 @@ class CommonButton extends StatelessWidget {
     final themeBg = backgroundColor ?? AppColors.primary;
     final themeText = textColor ?? Colors.white;
 
-    return SizedBox(
+    final Widget button = SizedBox(
       width: width,
       height: height,
       child: ElevatedButton(
@@ -60,5 +61,15 @@ class CommonButton extends StatelessWidget {
               ),
       ),
     );
+
+    if (onPressed != null && !isLoading) {
+      return AnimatedPressable(
+        onTap: onPressed,
+        child: IgnorePointer(child: button),
+      );
+    }
+
+    return button;
   }
 }
+

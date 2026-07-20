@@ -7,6 +7,8 @@ import 'package:testy_food/core/theme/app_colors.dart';
 import 'package:testy_food/core/theme/app_spacing.dart';
 import 'package:testy_food/core/theme/app_text_styles.dart';
 import 'package:testy_food/core/widgets/common_cached_network_image.dart';
+import 'package:testy_food/core/widgets/animated_pressable.dart';
+import 'package:testy_food/core/widgets/animate_in.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -242,208 +244,232 @@ class _HomePageState extends ConsumerState<HomePage> {
                   12.height,
 
                   // Offer Banner
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Container(
-                      height: 180,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        gradient: const LinearGradient(
-                          colors: [
-                            AppColors.primary,
-                            AppColors.secondary,
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.primary.withValues(
-                              alpha: 0.15,
-                            ),
-                            blurRadius: 12,
-                            offset: const Offset(0, 6),
+                  AnimateIn(
+                    delay: const Duration(milliseconds: 100),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Container(
+                        height: 180,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          gradient: const LinearGradient(
+                            colors: [
+                              AppColors.primary,
+                              AppColors.secondary,
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                           ),
-                        ],
-                      ),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            left: 20,
-                            top: 20,
-                            bottom: 20,
-                            child: Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                  Text(
-                                    'FLASH SALE',
-                                    style: AppTextStyles.labelLarge
-                                        .copyWith(
-                                          color: Colors.white70,
-                                          letterSpacing: 1.5,
-                                        ),
-                                  ),
-                                  4.height,
-                                  Text(
-                                    '50% OFF\non Italian!',
-                                    style: AppTextStyles.headlineLargeMobile
-                                        .copyWith(
-                                          color: Colors.white,
-                                          height: 1.2,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                  16.height,
-                                  ElevatedButton(
-                                    onPressed: () => context.go(AppRoutes.offers),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.white,
-                                      foregroundColor: AppColors.primary,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                        vertical: 8,
-                                      ),
-                                      minimumSize: Size.zero,
-                                      tapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                      elevation: 0,
-                                    ),
-                                    child: Text(
-                                      'Order Now',
-                                      style: AppTextStyles.labelSmall.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        color: AppColors.primary,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.primary.withValues(
+                                alpha: 0.15,
                               ),
+                              blurRadius: 12,
+                              offset: const Offset(0, 6),
                             ),
-                            // Floating Pizza Image on right
+                          ],
+                        ),
+                        child: Stack(
+                          children: [
                             Positioned(
-                              right: -30,
-                              bottom: -30,
-                              top: -10,
-                              child: Transform.rotate(
-                                angle: -0.15,
-                                child: SizedBox(
-                                  width: 220,
-                                  child: CommonCachedNetworkImage(
-                                    imageUrl:
-                                        'https://lh3.googleusercontent.com/aida-public/AB6AXuAnH6fy7YzqI-L_MAVW8Zlzt9ndPbJPjaFHQ-smxVYneBJEJkSzxCpWssRMsWFgu2P_dErCoLCQDAEcXA52goVWuJe0YEklBf9pIb2gtyJ5AwoC3G0h0Al9g89CRwQbinnrD1IDUPOi2_9dw0UgGAUTnxfmpkydSFEhUyzyAwivmrFUx9Y_XU9f_NBP_MJYwhgfZwFQD5GdOr9GoqwH4FLTrf4KdLfDRQBEg1CTV1LbPYO_Mk-dZe0BaQXaGIC5fvfw7TbYGqaRzMsZ',
-                                    fit: BoxFit.contain,
+                              left: 20,
+                              top: 20,
+                              bottom: 20,
+                              child: Column(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                    Text(
+                                      'FLASH SALE',
+                                      style: AppTextStyles.labelLarge
+                                          .copyWith(
+                                            color: Colors.white70,
+                                            letterSpacing: 1.5,
+                                          ),
+                                    ),
+                                    4.height,
+                                    Text(
+                                      '50% OFF\non Italian!',
+                                      style: AppTextStyles.headlineLargeMobile
+                                          .copyWith(
+                                            color: Colors.white,
+                                            height: 1.2,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                    16.height,
+                                    AnimatedPressable(
+                                      onTap: () => context.go(AppRoutes.offers),
+                                      child: IgnorePointer(
+                                        child: ElevatedButton(
+                                          onPressed: () {},
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.white,
+                                            foregroundColor: AppColors.primary,
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 16,
+                                              vertical: 8,
+                                            ),
+                                            minimumSize: Size.zero,
+                                            tapTargetSize:
+                                                MaterialTapTargetSize.shrinkWrap,
+                                            elevation: 0,
+                                          ),
+                                          child: Text(
+                                            'Order Now',
+                                            style: AppTextStyles.labelSmall.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColors.primary,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              // Floating Pizza Image on right
+                              Positioned(
+                                right: -30,
+                                bottom: -30,
+                                top: -10,
+                                child: Transform.rotate(
+                                  angle: -0.15,
+                                  child: SizedBox(
+                                    width: 220,
+                                    child: CommonCachedNetworkImage(
+                                      imageUrl:
+                                          'https://lh3.googleusercontent.com/aida-public/AB6AXuAnH6fy7YzqI-L_MAVW8Zlzt9ndPbJPjaFHQ-smxVYneBJEJkSzxCpWssRMsWFgu2P_dErCoLCQDAEcXA52goVWuJe0YEklBf9pIb2gtyJ5AwoC3G0h0Al9g89CRwQbinnrD1IDUPOi2_9dw0UgGAUTnxfmpkydSFEhUyzyAwivmrFUx9Y_XU9f_NBP_MJYwhgfZwFQD5GdOr9GoqwH4FLTrf4KdLfDRQBEg1CTV1LbPYO_Mk-dZe0BaQXaGIC5fvfw7TbYGqaRzMsZ',
+                                      fit: BoxFit.contain,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
+                  ),
                     24.height,
 
                     // Categories Section
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    AnimateIn(
+                      delay: const Duration(milliseconds: 200),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Categories',
-                            style: AppTextStyles.headlineSmall.copyWith(
-                              fontWeight: FontWeight.w700,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Categories',
+                                  style: AppTextStyles.headlineSmall.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () => context.go(AppRoutes.restaurantList),
+                                  child: Text(
+                                    'See All',
+                                    style: AppTextStyles.labelLarge.copyWith(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          TextButton(
-                            onPressed: () => context.go(AppRoutes.restaurantList),
-                            child: Text(
-                              'See All',
-                              style: AppTextStyles.labelLarge.copyWith(
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w600,
+                          8.height,
+                          SizedBox(
+                            height: 96,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
                               ),
+                              clipBehavior: Clip.none,
+                              children: [
+                                _buildCategoryItem('Pizza', Icons.local_pizza),
+                                _buildCategoryItem('Burger', Icons.lunch_dining),
+                                _buildCategoryItem('Chinese', Icons.ramen_dining),
+                                _buildCategoryItem('Dessert', Icons.icecream),
+                                _buildCategoryItem('Drinks', Icons.local_bar),
+                                _buildCategoryItem('Bakery', Icons.bakery_dining),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    8.height,
-                    SizedBox(
-                      height: 96,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                        ),
-                        clipBehavior: Clip.none,
-                        children: [
-                          _buildCategoryItem('Pizza', Icons.local_pizza),
-                          _buildCategoryItem('Burger', Icons.lunch_dining),
-                          _buildCategoryItem('Chinese', Icons.ramen_dining),
-                          _buildCategoryItem('Dessert', Icons.icecream),
-                          _buildCategoryItem('Drinks', Icons.local_bar),
-                          _buildCategoryItem('Bakery', Icons.bakery_dining),
                         ],
                       ),
                     ),
                     24.height,
 
                     // Popular Restaurants Section
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    AnimateIn(
+                      delay: const Duration(milliseconds: 300),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Popular Restaurants',
-                            style: AppTextStyles.headlineSmall.copyWith(
-                              fontWeight: FontWeight.w700,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Popular Restaurants',
+                                  style: AppTextStyles.headlineSmall.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () => context.go(AppRoutes.restaurantList),
+                                  child: Text(
+                                    'View All',
+                                    style: AppTextStyles.labelLarge.copyWith(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          TextButton(
-                            onPressed: () => context.go(AppRoutes.restaurantList),
-                            child: Text(
-                              'View All',
-                              style: AppTextStyles.labelLarge.copyWith(
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w600,
+                          8.height,
+                          SizedBox(
+                            height: 236,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
                               ),
+                              clipBehavior: Clip.none,
+                              children: [
+                                _buildRestaurantCard(
+                                  context: context,
+                                  name: 'The Golden Truffle',
+                                  rating: '4.8',
+                                  time: '20-30 min',
+                                  categories: 'European • Fine Dining • \$\$\$',
+                                  imageUrl:
+                                      'https://lh3.googleusercontent.com/aida-public/AB6AXuD6ZEcIwkG5YQe0tASRrchXkZjxgT70y73F2WLNXBy7T_LiPCK2T_hz4wwFtGCknqtRlKbd_JfyXO2rlGgqcA-Oq4uTkZjdXLj6l5FGtwURklNa8LIgCSkFL0W6Xio0yP-5DYC6AS2HSY9wRxffxd-t4ig4KqCo_5o6Y-tY71ynlZCRj8o7Umx44jr9doWsm0QXDI05X_-WCPxlesMSCe_2AlTuRoVw8sjZHoTRskqC3hmzT_Odt6eFF53iTdeygBASIAPwZYHfMikI',
+                                ),
+                                16.width,
+                                _buildRestaurantCard(
+                                  context: context,
+                                  name: 'Sushiko Urban',
+                                  rating: '4.5',
+                                  time: '15-25 min',
+                                  categories: 'Japanese • Sushi • \$\$',
+                                  imageUrl:
+                                      'https://lh3.googleusercontent.com/aida-public/AB6AXuCk71WN9fK3PlSKqQ5_f91QTSZ3Z3pZR92jSo0FJrropNsWvUcAs8_6OSnFai9IHQM3fP4c3NgFUMuzuJRyAWfzLoZs18_9G2gsNIR5P0VbeSAFBSKVzjy01tm5woEXk3z3UQO15Qth0jaXIh7CoI21Da7CqmAZGcM0B5pLBGyQO21c6BMX9lWRlsuBCN-pdCuFGE_v1uLAZLWsUS7OTOEqS87JmOTaVMsgZ0BDNUoMN4X1tpwwb2L-peBVD0SM3xPmKNlkL7xB9kYd',
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    8.height,
-                    SizedBox(
-                      height: 236,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                        ),
-                        clipBehavior: Clip.none,
-                        children: [
-                          _buildRestaurantCard(
-                            context: context,
-                            name: 'The Golden Truffle',
-                            rating: '4.8',
-                            time: '20-30 min',
-                            categories: 'European • Fine Dining • \$\$\$',
-                            imageUrl:
-                                'https://lh3.googleusercontent.com/aida-public/AB6AXuD6ZEcIwkG5YQe0tASRrchXkZjxgT70y73F2WLNXBy7T_LiPCK2T_hz4wwFtGCknqtRlKbd_JfyXO2rlGgqcA-Oq4uTkZjdXLj6l5FGtwURklNa8LIgCSkFL0W6Xio0yP-5DYC6AS2HSY9wRxffxd-t4ig4KqCo_5o6Y-tY71ynlZCRj8o7Umx44jr9doWsm0QXDI05X_-WCPxlesMSCe_2AlTuRoVw8sjZHoTRskqC3hmzT_Odt6eFF53iTdeygBASIAPwZYHfMikI',
-                          ),
-                          16.width,
-                          _buildRestaurantCard(
-                            context: context,
-                            name: 'Sushiko Urban',
-                            rating: '4.5',
-                            time: '15-25 min',
-                            categories: 'Japanese • Sushi • \$\$',
-                            imageUrl:
-                                'https://lh3.googleusercontent.com/aida-public/AB6AXuCk71WN9fK3PlSKqQ5_f91QTSZ3Z3pZR92jSo0FJrropNsWvUcAs8_6OSnFai9IHQM3fP4c3NgFUMuzuJRyAWfzLoZs18_9G2gsNIR5P0VbeSAFBSKVzjy01tm5woEXk3z3UQO15Qth0jaXIh7CoI21Da7CqmAZGcM0B5pLBGyQO21c6BMX9lWRlsuBCN-pdCuFGE_v1uLAZLWsUS7OTOEqS87JmOTaVMsgZ0BDNUoMN4X1tpwwb2L-peBVD0SM3xPmKNlkL7xB9kYd',
                           ),
                         ],
                       ),
@@ -451,60 +477,68 @@ class _HomePageState extends ConsumerState<HomePage> {
                     24.height,
 
                     // Recommended for you Section
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(
-                        'Recommended for You',
-                        style: AppTextStyles.headlineSmall.copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    16.height,
-
-                    // Recommendations Bento/Grid-list style
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                        childAspectRatio: 0.8,
+                    AnimateIn(
+                      delay: const Duration(milliseconds: 400),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildGridFoodItem(
-                            context: context,
-                            name: 'Classic Wagyu Burger',
-                            price: '\$18.50',
-                            rating: '4.9',
-                            imageUrl:
-                                'https://lh3.googleusercontent.com/aida-public/AB6AXuAx7qWbnrecqMf0mtjbBV2gDGNE1UOG64xVzoMaP4chs4dhIBFXP7ef1cwqGDGayjkqEs9F5HJd2C0K7SCV-65WMENqCCOuTx2SrYCBIFO4wkq7cxRu6Ka9egABUZI0XbptOiAYAwchlUVHqD9lyyjLf2FqrFh0sEfD-pQRWEs5fNZlNs1InBYgAw9aJ6HvP5T6E41qQ0EVzTj2W1EZLwRw98VcPzk-Vc2C2q3HVf2VoB8xC-Fse08s7q1iWJWGN2F14a_PgDdf6_BJ',
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Text(
+                              'Recommended for You',
+                              style: AppTextStyles.headlineSmall.copyWith(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
                           ),
-                          _buildGridFoodItem(
-                            context: context,
-                            name: 'Modern Greek Salad',
-                            price: '\$12.00',
-                            rating: '4.7',
-                            imageUrl:
-                                'https://lh3.googleusercontent.com/aida-public/AB6AXuB4zc4EFdiLhhT_XDDM0JvYf0gHwH5Lz6-iBpKaL5-nrHS8BECDnSJjWe6cFIrZxw0aALv5W5QvTSJkZnpeKogGA_eKhDlz5218veK58SHUUafPasXAKWpSOg4MYw-PZbeYBwbADwY7uz79ppEwxAu95rejxYSi_-OPwJ3p7E69BKkeRM42AdgZFvnYJbykmYmACW5cJJoqc7v9x4NeT0IY2urTAotww5AWMtjBdUe-D2mjr0xa6aMT8fwS7swpYEhHyj2lSUkqsC1P',
+                          16.height,
+
+                          // Recommendations Bento/Grid-list style
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: GridView.count(
+                              crossAxisCount: 2,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              mainAxisSpacing: 16,
+                              crossAxisSpacing: 16,
+                              childAspectRatio: 0.8,
+                              children: [
+                                _buildGridFoodItem(
+                                  context: context,
+                                  name: 'Classic Wagyu Burger',
+                                  price: '\$18.50',
+                                  rating: '4.9',
+                                  imageUrl:
+                                      'https://lh3.googleusercontent.com/aida-public/AB6AXuAx7qWbnrecqMf0mtjbBV2gDGNE1UOG64xVzoMaP4chs4dhIBFXP7ef1cwqGDGayjkqEs9F5HJd2C0K7SCV-65WMENqCCOuTx2SrYCBIFO4wkq7cxRu6Ka9egABUZI0XbptOiAYAwchlUVHqD9lyyjLf2FqrFh0sEfD-pQRWEs5fNZlNs1InBYgAw9aJ6HvP5T6E41qQ0EVzTj2W1EZLwRw98VcPzk-Vc2C2q3HVf2VoB8xC-Fse08s7q1iWJWGN2F14a_PgDdf6_BJ',
+                                ),
+                                _buildGridFoodItem(
+                                  context: context,
+                                  name: 'Modern Greek Salad',
+                                  price: '\$12.00',
+                                  rating: '4.7',
+                                  imageUrl:
+                                      'https://lh3.googleusercontent.com/aida-public/AB6AXuB4zc4EFdiLhhT_XDDM0JvYf0gHwH5Lz6-iBpKaL5-nrHS8BECDnSJjWe6cFIrZxw0aALv5W5QvTSJkZnpeKogGA_eKhDlz5218veK58SHUUafPasXAKWpSOg4MYw-PZbeYBwbADwY7uz79ppEwxAu95rejxYSi_-OPwJ3p7E69BKkeRM42AdgZFvnYJbykmYmACW5cJJoqc7v9x4NeT0IY2urTAotww5AWMtjBdUe-D2mjr0xa6aMT8fwS7swpYEhHyj2lSUkqsC1P',
+                                ),
+                              ],
+                            ),
+                          ),
+                          16.height,
+
+                          // Full-width Recommended item
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: _buildFullWidthFoodItem(
+                              context: context,
+                              name: 'Signature Lava Delight',
+                              description:
+                                  'Rich Belgian chocolate with a warm flowing center served with fresh berries.',
+                              price: '\$9.50',
+                              imageUrl:
+                                  'https://lh3.googleusercontent.com/aida-public/AB6AXuDLvTwhucmZgHjg3i4xW3WEiuTUstjDYpNIAWV7P834zrRA571PVrSMKQ5dy6sXHbaq0pajIXyZDdUbfGssfD2RJp1yuL7cuTQfJpkGwZpMKMjs6o-MYCyclqyROYPRaJSPYJdc48VDCM0KToJll4RILQfxkmWe3tqn47Mm-5Io2AkZ2qBkRxZDbzOrYVEtYoG3N2opYVVAdT5cMotfHCTo8a_Hj_rbzbrM7vuvwAvmx3IHgqd5uGLULnru20S28hm5rIxBi6CsoCb6',
+                            ),
                           ),
                         ],
-                      ),
-                    ),
-                    16.height,
-
-                    // Full-width Recommended item
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: _buildFullWidthFoodItem(
-                        context: context,
-                        name: 'Signature Lava Delight',
-                        description:
-                            'Rich Belgian chocolate with a warm flowing center served with fresh berries.',
-                        price: '\$9.50',
-                        imageUrl:
-                            'https://lh3.googleusercontent.com/aida-public/AB6AXuDLvTwhucmZgHjg3i4xW3WEiuTUstjDYpNIAWV7P834zrRA571PVrSMKQ5dy6sXHbaq0pajIXyZDdUbfGssfD2RJp1yuL7cuTQfJpkGwZpMKMjs6o-MYCyclqyROYPRaJSPYJdc48VDCM0KToJll4RILQfxkmWe3tqn47Mm-5Io2AkZ2qBkRxZDbzOrYVEtYoG3N2opYVVAdT5cMotfHCTo8a_Hj_rbzbrM7vuvwAvmx3IHgqd5uGLULnru20S28hm5rIxBi6CsoCb6',
                       ),
                     ),
                     80.height,
@@ -520,7 +554,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   // Category Item Widget
   Widget _buildCategoryItem(String title, IconData icon) {
     final active = _selectedCategory == title;
-    return GestureDetector(
+    return AnimatedPressable(
       onTap: () {
         setState(() {
           _selectedCategory = title;
@@ -573,7 +607,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     required String categories,
     required String imageUrl,
   }) {
-    return GestureDetector(
+    return AnimatedPressable(
       onTap: () => context.go(AppRoutes.restaurantDetails),
       child: Container(
         width: 280,
@@ -605,9 +639,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                   child: SizedBox(
                     height: 140,
                     width: double.infinity,
-                    child: CommonCachedNetworkImage(
-                      imageUrl: imageUrl,
-                      fit: BoxFit.cover,
+                    child: Hero(
+                      tag: 'restaurant-cover-$name',
+                      child: CommonCachedNetworkImage(
+                        imageUrl: imageUrl,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -716,7 +753,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     required String rating,
     required String imageUrl,
   }) {
-    return GestureDetector(
+    return AnimatedPressable(
       onTap: () => context.go(AppRoutes.foodDetails),
       child: Container(
         padding: const EdgeInsets.all(8),
@@ -741,9 +778,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                     child: SizedBox(
                       width: double.infinity,
                       height: double.infinity,
-                      child: CommonCachedNetworkImage(
-                        imageUrl: imageUrl,
-                        fit: BoxFit.cover,
+                      child: Hero(
+                        tag: 'food-cover-$name',
+                        child: CommonCachedNetworkImage(
+                          imageUrl: imageUrl,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -805,7 +845,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     required String price,
     required String imageUrl,
   }) {
-    return GestureDetector(
+    return AnimatedPressable(
       onTap: () => context.go(AppRoutes.foodDetails),
       child: Container(
         padding: const EdgeInsets.all(12),
@@ -826,9 +866,12 @@ class _HomePageState extends ConsumerState<HomePage> {
               child: SizedBox(
                 width: 100,
                 height: 100,
-                child: CommonCachedNetworkImage(
-                  imageUrl: imageUrl,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: 'food-cover-$name',
+                  child: CommonCachedNetworkImage(
+                    imageUrl: imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -866,29 +909,34 @@ class _HomePageState extends ConsumerState<HomePage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () => context.go(AppRoutes.foodDetails),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryContainer.withValues(
-                            alpha: 0.15,
-                          ),
-                          foregroundColor: AppColors.primary,
-                          elevation: 0,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
-                          ),
-                          minimumSize: Size.zero,
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: Text(
-                          'Add to Cart',
-                          style: AppTextStyles.labelSmall.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.primary,
+                      AnimatedPressable(
+                        onTap: () => context.go(AppRoutes.foodDetails),
+                        child: IgnorePointer(
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primaryContainer.withValues(
+                                alpha: 0.15,
+                              ),
+                              foregroundColor: AppColors.primary,
+                              elevation: 0,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              minimumSize: Size.zero,
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            child: Text(
+                              'Add to Cart',
+                              style: AppTextStyles.labelSmall.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.primary,
+                              ),
+                            ),
                           ),
                         ),
                       ),
